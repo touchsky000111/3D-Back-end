@@ -1,34 +1,42 @@
 const mongoose = require("mongoose");
 
-const Bulk_Call_Schedule_Model = new mongoose.Schema({
-    userId: {
+const users = new mongoose.Schema({
+    email: {
+        type: String,
+        required: false,
+        unique: true
+    },
+    password: {
         type: String,
         required: false,
     },
-    email: {
+    fullName: {
         type: String,
         required: false
     },
-    date: {
+    userName:{
         type: String,
         required: false
     },
-    time: {
+    phoneNumber:{
         type: String,
         required: false
     },
-    timezone: {
+    companyName: {
         type: String,
         required: false
     },
-    afterHour: {
-        type: Number,
+    role: {
+        type: String,
         required: false
     },
-    status: {
+    comments: {
         type: String,
         required: false
     }
+
+}, {
+    timestamps: true // Adds createdAt and updatedAt fields
 })
 
-module.exports = mongoose.model("Bulk_Call_Schedule_Model", Bulk_Call_Schedule_Model) 
+module.exports = mongoose.model("Users", users)

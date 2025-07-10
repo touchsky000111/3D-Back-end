@@ -1,5 +1,4 @@
-const userModel = require("../model/users")
-const calendlyApiKeyModel = require("../model/calendly.oauth.model")
+const userModel = require("../model/users.model")
 const crypto = require('crypto')
 const { generateTokens } = require("../controller/auth.controller")
 const { generateHashedPassword } = require("../lib/auth")
@@ -15,18 +14,12 @@ exports.is_exist_user = async (email) => {
     }
 }
 
-exports.regist_user = async (userId, userName) => {
+exports.regist_user = async (data) => {
     try {
-        const newUser = new userModel({
-            userId: userId,
-            userName: userName,
-            subscribeLevel: false
-        })
+        const newUser = new userModel(data)
         await newUser.save()
-        return true;
-    } catch (error) {
-        // console.error('>> ERROR: Regist_user error >> ', error.response?.data || error.message);
-        console.error('>> ERROR: Regist_user error >> ', error.response);
+    } catch (err) {
+        console.error('err => ', err)
     }
 }
 
@@ -41,7 +34,7 @@ exports.login = async ({ email, password }) => {
             const access_token = generateTokens(user)
 
             const lastLogin = new Date()
-            
+
             await userModel.updateOne({ email }, { lastLogin })
             return access_token
         } else {

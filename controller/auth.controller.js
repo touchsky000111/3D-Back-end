@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const config = require("../config/index")
-const userModel = require("../model/users");
-const gooleMeetingRegisterModel = require("../model/google.meeting.model")
+const userModel = require("../model/users.model");
 const axios = require('axios');
 const userVerifyModel = require("../model/email.verify");
 

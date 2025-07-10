@@ -1,17 +1,7 @@
 const { authenticate } = require('@google-cloud/local-auth');
-const { google } = require('googleapis');
-const path = require('path');
-const { send_verify_code, verify_code, reset_password, verify_reset_password, generate_new_password } = require("../controller/emailjs.controller")
-const userModel = require("../model/users")
-const emailVerifyModel = require("../model/email.verify");
-const { login } = require('../controller/mongoose.controller');
-const { handleGoogleAuth, generateTokens } = require('../controller/auth.controller');
-const vapiKeyModel = require('../model/vapikey.model')
+const userModel = require("../model/users.model")
+const { regist_user, login } = require('../controller/mongoose.controller');
 const config = require('../config/index')
-const twilioController = require('../controller/twilio.controller')
-const vapiController = require("../controller/vapi.controller");
-const assistantController = require("../controller/assistant.controller")
-const twilioModel = require('../model/twilio.model');
 const { generateHashedPassword } = require('../lib/auth');
 
 module.exports = async (fastify) => {
@@ -20,32 +10,22 @@ module.exports = async (fastify) => {
         return { msg: "hi" }
     });
 
-    fastify.post("/register", async (req, res) => {
+    fastify.post("/register", async (req, reply) => {
+        try {
+            console.log("register")
+            console.log(req.body)
+            const signUpData = req.body
+            await regist_user(signUpData)
+            return reply.code(200).send({
+                msg: true
+            })
+        } catch (err) {
+            console.error('err => ', err)
+            return reply.code(500).send({
+                msg: false
+            });
+        }
 
-        console.log("register")
-        console.log(req.body)
-        // const { email, password, fullName, companyName } = req.body
-        // const result = await send_verify_code({ email, password, fullName, companyName })
-        // if (result === true) return true
-        // else return false
-        return { msg: "register" }
-    })
-
-    fastify.post("/reset-password", async (req, res) => {
-        const { email } = req.body
-        console.log("email => ", email)
-        const result = await reset_password({ email })
-        if (result === true) return true
-        else return false
-    })
-
-    fastify.post("/generate-new-password", async (req, res) => {
-        const { email, password } = req.body
-        console.log("email => ", email)
-        console.log("password => ", password)
-        const result = await generate_new_password({ email, password })
-        if (result === true) return true
-        else return false
     })
 
     fastify.post("/verify-reset-password", async (req, res) => {
@@ -75,7 +55,7 @@ module.exports = async (fastify) => {
                 fullName: emailVerifyResult.fullName,
                 companyName: emailVerifyResult.companyName,
                 authProvider: 'local',
-                
+
             })
 
             //Create twilio sub account
@@ -109,100 +89,4 @@ module.exports = async (fastify) => {
         else res.code(400).send({ error: access_token })
     })
 
-    fastify.post("/admin/login", async (req, res) => {
-        try {
-            const { email, password } = req.body;
-            
-            // Find admin user
-            const admin = await userModel.findOne({ email, role: 'admin' });
-            if (!admin) {
-                return res.code(401).send({ error: 'Invalid admin credentials' });
-            }
-
-            // Verify password
-            const hashedPassword = await generateHashedPassword(password);
-            if (admin.password !== hashedPassword) {
-                return res.code(401).send({ error: 'Invalid admin credentials' });
-            }
-
-            // Generate tokens
-            const tokens = generateTokens(admin);
-            
-            return res.code(200).send({
-                success: true,
-                ...tokens,
-                user: {
-                    id: admin._id,
-                    email: admin.email,
-                    name: admin.fullName,
-                    role: admin.role
-                }
-            });
-        } catch (error) {
-            console.error('Admin login error:', error);
-            return res.code(500).send({ error: 'Internal server error' });
-        }
-    });
-
-    // Google OAuth routes
-    fastify.post('/google', async (request, reply) => {
-        try {
-            console.log('=== Google Auth Request ===');
-            console.log('Headers:', request.headers);
-            console.log('Body:', request.body);
-
-            const { email, name, googleId, image } = request.body
-
-            // Validate required fields
-            if (!email || !googleId) {
-                console.log('Missing required fields:', { email, googleId });
-                return reply.status(400).send({
-                    success: false,
-                    error: 'Email and Google ID are required'
-                })
-            }
-
-            console.log('Calling handleGoogleAuth with:', { email, name, googleId, image });
-
-            // Handle Google authentication
-            const result = await handleGoogleAuth({ email, name, googleId, image });
-            console.log('Google auth result:', result);
-
-            return result;
-
-        } catch (error) {
-            console.error('=== Google Auth Error ===');
-            console.error('Error details:', error);
-            console.error('Stack trace:', error.stack);
-            return reply.status(500).send({
-                success: false,
-                error: 'Internal server error',
-                details: error.message
-            })
-        }
-    })
-
-    // Protected routes
-    fastify.get("/me", {
-        preHandler: fastify.authenticate
-    }, async (request, reply) => {
-        return { user: request.user }
-    });
-
-    // Admin only route
-    fastify.get("/admin", {
-        preHandler: fastify.authenticateWithRole(['admin'])
-    }, async (request, reply) => {
-        return { message: 'Admin access granted' }
-    });
-
-    // Optional auth route
-    fastify.get("/public-or-private", {
-        preHandler: fastify.optionalAuth
-    }, async (request, reply) => {
-        if (request.user) {
-            return { message: 'Authenticated user', user: request.user }
-        }
-        return { message: 'Public access' }
-    });
 }

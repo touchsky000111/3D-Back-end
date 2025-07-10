@@ -1,7 +1,4 @@
-const { get_user } = require("../controller/mongoose.controller")
 const { updateProfile, getProfile } = require("../controller/profile.controller")
-const PaymentModelSchema = require('../model/payment.model')
-const SubscriptionModelSchema = require('../model/subscription.model')
 
 module.exports = async (fastify, opts) => {
     fastify.addHook('preHandler', fastify.authenticate);

@@ -1,4 +1,4 @@
-const userModel = require("../model/users")
+const userModel = require("../model/users.model")
 const mongooseController = require("./mongoose.controller")
 const authLib = require("../lib/auth")
 exports.updateProfile = async ({ id, password, currentPassword, fullName, companyName, avatar }) => {
