@@ -4,9 +4,9 @@ module.exports = async () => {
     const chalk = require('chalk');
     const config = require("../config/index")
 
-    const fastifyMultipart = require('@fastify/multipart');
-    
-    fastify.register(fastifyMultipart);
+    // const fastifyMultipart = require('@fastify/multipart');
+
+    // fastify.register(fastifyMultipart);
 
     fastify.register(require('@fastify/formbody')); // Needed for URL-encoded forms
     fastify.register(require('./mongoose'))
@@ -17,6 +17,7 @@ module.exports = async () => {
 
     // Register auth middleware
     fastify.register(require('../middleware/auth.middleware'));
+
 
     // Register CORS with specific configuration
     fastify.register(require('@fastify/cors'), {

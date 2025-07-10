@@ -11,8 +11,6 @@ exports.generateTokens = (user) => {
         {
             id: user._id,
             email: user.email,
-            authProvider: user.authProvider,
-            role: user.role
         },
         config.ACCESS_TOKEN_SECRET,
         { expiresIn: config.ACCESS_TOKEN_EXPIRE_TIME }

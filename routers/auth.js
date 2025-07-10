@@ -83,9 +83,11 @@ module.exports = async (fastify) => {
 
     fastify.post("/login", async (req, res) => {
         const { email, password } = req.body
+        console.log("email => ", email)
+        console.log("password => ", password)
         const access_token = await login({ email, password })
         console.log("token => ", access_token)
-        if (access_token.accessToken) return access_token
+        if (access_token.result == true) return access_token
         else res.code(400).send({ error: access_token })
     })
 

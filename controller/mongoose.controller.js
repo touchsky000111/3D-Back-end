@@ -2,6 +2,7 @@ const userModel = require("../model/users.model")
 const crypto = require('crypto')
 const { generateTokens } = require("../controller/auth.controller")
 const { generateHashedPassword } = require("../lib/auth")
+const config = require("../config/index")
 exports.is_exist_user = async (email) => {
     try {
         const user = await userModel.findOne({ email })
@@ -18,6 +19,7 @@ exports.regist_user = async (data) => {
     try {
         const newUser = new userModel(data)
         await newUser.save()
+
     } catch (err) {
         console.error('err => ', err)
     }
@@ -27,21 +29,32 @@ exports.login = async ({ email, password }) => {
     if (await this.is_exist_user(email)) {
         const user = await userModel.findOne({ email })
         const userPassword = String(user.password)
-        const hashedPassword = String(await generateHashedPassword(password))
         console.log(userPassword)
-        console.log(hashedPassword)
-        if (userPassword == hashedPassword) {
+        if (userPassword == password) {
             const access_token = generateTokens(user)
 
             const lastLogin = new Date()
 
             await userModel.updateOne({ email }, { lastLogin })
-            return access_token
+            return {
+                result: true,
+                authorization: {
+                    token: access_token.accessToken,
+                    type: "bear",
+                    expires_in: config.ACCESS_TOKEN_EXPIRE_TIME
+                }
+            }
         } else {
-            return "Password not Correct"
+            return {
+                result: false,
+                msg: "Password is not correct"
+            }
         }
     } else {
-        return "Invalid User"
+        return {
+            result: false,
+            msg: "Password is not correct"
+        }
     }
 }
 
