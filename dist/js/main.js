@@ -22257,7 +22257,7 @@ isHidden || Va(),
           a = currentMaterial ? "?ref=" + currentMaterial : "";
         $.ajax({
           type: "POST",
-          url: "http://198.23.235.73:8080/api/v1/build/save" + a,
+          url: "api/v1/build/save" + a,
           data: e,
           dataType: "json",
           encode: !0,

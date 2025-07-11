@@ -1,4 +1,6 @@
 const buildModel = require("../model/build.model")
+const { sendSMS, emailJsSMS } = require("../lib/etc")
+const config = require("../config/index")
 exports.saveDesign = async (designData) => {
   try {
 
@@ -18,9 +20,22 @@ exports.saveDesign = async (designData) => {
     const projectId = finalData.id
     const projectEmail = finalData.userData.email
 
+    console.log("Project ID: ", projectId);
+    console.log("Project Email: ", projectEmail);
     // Now you can access it as a normal object
     const newBuild = new buildModel({ build: finalData })
     await newBuild.save()
+    const date = new Date();
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+    const link = `${config.DOMAIN}?id=-${projectId}&dt=${formattedDate}`
+    console.log("link => ", link)
+    // await sendSMS(projectEmail, link)
+    await emailJsSMS(projectEmail, link)
     return true
   } catch (err) {
     console.log("err => ", err)
@@ -59,6 +74,17 @@ exports.find = async ({ id, dt }) => {
 
     return jsonString
     // return dbdata[0].build.id
+  } catch (err) {
+    console.error("err => ", err)
+    return null;
+  }
+}
+
+exports.getAll = async (email) => {
+  try {
+    const dbdata = await buildModel.find()
+    const result = dbdata.filter(item => item.build?.userData?.email === email)
+    return result
   } catch (err) {
     console.error("err => ", err)
     return null;

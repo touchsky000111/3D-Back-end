@@ -35,4 +35,18 @@ module.exports = async (fastify) => {
         }
     })
 
+    fastify.get("/getAll", async (req, rep) => {
+        try {
+            console.log("getting all data")
+            const { email } = req.query
+            const result = await buildController.getAll(email)
+            rep.code(200).send(result)
+        } catch (err) {
+            console.error('err => ', err)
+            return rep.code(500).send({
+                msg: false
+            });
+        }
+    })
+
 }
