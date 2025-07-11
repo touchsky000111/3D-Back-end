@@ -42,7 +42,8 @@ exports.login = async ({ email, password }) => {
                     token: access_token.accessToken,
                     type: "bear",
                     expires_in: config.ACCESS_TOKEN_EXPIRE_TIME
-                }
+                },
+                user: email
             }
         } else {
             return {
