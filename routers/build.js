@@ -5,10 +5,8 @@ module.exports = async (fastify) => {
 
     fastify.post("/save", async (req, reply) => {
         try {
-            console.log('Content-Type:', req.headers['content-type']);
 
             const data= req.body
-            console.log("data => ", data)
             await buildController.saveDesign(data)
             return reply.code(200).send({
                 msg: true

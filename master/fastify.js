@@ -3,7 +3,8 @@ module.exports = async () => {
     const routers = require("./routers");
     const chalk = require('chalk');
     const config = require("../config/index")
-
+    const path = require("path")
+    const fastifyStatic  = require("@fastify/static")
     // const fastifyMultipart = require('@fastify/multipart');
 
     // fastify.register(fastifyMultipart);
@@ -25,6 +26,12 @@ module.exports = async () => {
         credentials: true,
         maxAge: 86400 // 24 hours
     });
+
+
+    fastify.register(fastifyStatic, {
+        root: path.join(__dirname, '../dist'),
+        prefix:'/'
+    })
 
     fastify.addHook('onResponse', (request, reply, done) => {
         const now = new Date();

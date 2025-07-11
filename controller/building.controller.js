@@ -6,12 +6,20 @@ exports.saveDesign = async (designData) => {
         // const jsonString = JSON.parse(designData, null, 2); // pretty print with 2 spaces
         // const jsondata = await designData.json()
 
+        const stringifyData = JSON.stringify(designData)
+        console.log("json: ", stringifyData);
+        console.log("Data type: ", typeof stringifyData)
 
-        console.log("json: ", typeof designData);
 
+        const parsedData = JSON.parse(stringifyData)
+
+        console.log("Parsed Data => ", parsedData)
+
+        const param1 = Object.keys(parsedData)[0]
+        const finalData = JSON.parse(param1)
+        console.log("Final Data: ", finalData);
         // Now you can access it as a normal object
-        console.log(designData.id);
-        const newBuild = new buildModel({ build: JSON.stringify(designData) })
+        const newBuild = new buildModel({ build: finalData })
         await newBuild.save()
         return true
     } catch (err) {
@@ -20,27 +28,23 @@ exports.saveDesign = async (designData) => {
 }
 
 exports.find = async ({ id, dt }) => {
-    try {
-        console.log("getting data")
-        const data = await buildModel.find()
-        const keys = Object.keys(rawObj);
-
-        if (keys.length > 0) {
-            let rawKey = keys[0]; // malformed JSON string stored as key
-
-            // clean up trailing ="
-            if (rawKey.endsWith('="') || rawKey.endsWith('="\"')) {
-                rawKey = rawKey.replace(/="\s*"?$/, '');
-            }
-
-            try {
-                const parsedData = JSON.parse(rawKey);
-                return parsedData;
-            } catch (err) {
-                console.error("JSON parse failed:", err);
-            }
+  try {
+    console.log("getting data")
+    const dbdata = await buildModel.find()
+    let result 
+    dbdata.map(item => {
+        if("-" + item.build.id == id){
+            console.log("match => ", id)
+            result = {...item.build.buildingData,     "porches": [],
+    "doorsWindows": [],
+    "scaleItems": [],
+    "interiorItems": []}
         }
-    } catch (err) {
-        console.error("err => ", err)
-    }
+    })
+    return JSON.stringify(result)
+    // return dbdata[0].build.id
+  } catch (err) {
+    console.error("err => ", err)
+    return null;
+  }
 }

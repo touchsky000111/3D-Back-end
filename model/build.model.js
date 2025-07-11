@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const buildSchema = new Schema({
     build: {
-        type: String, // allows any type of object
+        type: Schema.Types.Mixed, // allows any type of object
         required: false,
     },
 });
