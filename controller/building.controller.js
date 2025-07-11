@@ -2,22 +2,21 @@ const buildModel = require("../model/build.model")
 exports.saveDesign = async (designData) => {
   try {
 
-    // console.log("origin data => ", designData)
-    // const jsonString = JSON.parse(designData, null, 2); // pretty print with 2 spaces
-    // const jsondata = await designData.json()
-
     const stringifyData = JSON.stringify(designData)
-    console.log("json: ", stringifyData);
-    console.log("Data type: ", typeof stringifyData)
-
-
     const parsedData = JSON.parse(stringifyData)
-
-    console.log("Parsed Data => ", parsedData)
-
     const param1 = Object.keys(parsedData)[0]
-    const finalData = JSON.parse(param1)
+
+    let finalData
+
+    if (param1[param1.length - 1] == "}" && param1[param1.length - 2] == '"') {
+      finalData = JSON.parse(param1)
+    } else {
+      finalData = JSON.parse(param1 + '"}')
+    }
+
     console.log("Final Data: ", finalData);
+    const projectId = finalData.id
+    const projectEmail = finalData.userData.email
 
     // Now you can access it as a normal object
     const newBuild = new buildModel({ build: finalData })
