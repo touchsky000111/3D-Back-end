@@ -1,509 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="viewport"
-      content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1"
-    />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <title>Backwoods Buildings & Truss LLC. - 3D Designer</title>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="js/additional-methods.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="css/bootstrap.min.css"
-    />
-    <script
-      src="js/bootbox.min.js"
-      integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com/" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="css/stylefbbb.css?v=1.2.3" />
 
-    <script
-      src="js/three.min.js"
-      integrity="sha256-MbIcpOhIEGLabqntH1B7ZgE7a6V0TrocmKouz1npT1g="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="js/Tween.min.js"
-      integrity="sha256-Z/UUKtBPLC650VtCH2fk+ESvh5c374GSjz3AE/0BITo="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="js/Stats.min.js"
-      integrity="sha256-eQxIuR9Z5Afu5SFVtoND4dHdHygFRhueTk7mwkINjro="
-      crossorigin="anonymous"
-    ></script>
-    <script src="js/controls/OrbitControls.jds.js"></script>
-    <script src="js/loaders/LWOLoader.min.js"></script>
-    <script src="js/exporters/GLTFExporter.js"></script>
-    <script type="text/javascript" src="js/Detector.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport"
+    content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Backwoods Buildings & Truss LLC. - 3D Designer</title>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="js/additional-methods.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+  <script src="js/bootbox.min.js"
+    integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" type="text/css" href="css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="css/stylefbbb.css?v=1.2.3" />
 
-    <!-- dat.gui -->
-    <script
-      type="text/javascript"
-      src="js/libs/dat.gui.modified.min.js"
-    ></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="css/dat-gui-light-theme.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="css/dat-gui-swec.css"
-    />
+  <script src="js/three.min.js" integrity="sha256-MbIcpOhIEGLabqntH1B7ZgE7a6V0TrocmKouz1npT1g="
+    crossorigin="anonymous"></script>
+  <script src="js/Tween.min.js" integrity="sha256-Z/UUKtBPLC650VtCH2fk+ESvh5c374GSjz3AE/0BITo="
+    crossorigin="anonymous"></script>
+  <script src="js/Stats.min.js" integrity="sha256-eQxIuR9Z5Afu5SFVtoND4dHdHygFRhueTk7mwkINjro="
+    crossorigin="anonymous"></script>
+  <script src="js/controls/OrbitControls.jds.js"></script>
+  <script src="js/loaders/LWOLoader.min.js"></script>
+  <script src="js/exporters/GLTFExporter.js"></script>
+  <script type="text/javascript" src="js/Detector.js"></script>
 
-    <!-- Favicon -->
-    <link
-      rel="apple-touch-icon"
-      sizes="57x57"
-      href="images/favicon/apple-icon-57x57.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="60x60"
-      href="images/favicon/apple-icon-60x60.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="72x72"
-      href="images/favicon/apple-icon-72x72.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="76x76"
-      href="images/favicon/apple-icon-76x76.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="114x114"
-      href="images/favicon/apple-icon-114x114.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="120x120"
-      href="images/favicon/apple-icon-120x120.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="144x144"
-      href="images/favicon/apple-icon-144x144.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="images/favicon/apple-icon-152x152.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="images/favicon/apple-icon-180x180.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="images/favicon/android-icon-192x192.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="images/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="images/favicon/favicon-96x96.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="images/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="images/favicon/manifest.mod.json" />
-    <meta name="msapplication-TileColor" content="#37434d" />
-    <meta
-      name="msapplication-TileImage"
-      content="images/favicon/ms-icon-144x144.png"
-    />
-    <meta name="theme-color" content="#37434d" />
+  <!-- dat.gui -->
+  <script type="text/javascript" src="js/libs/dat.gui.modified.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/dat-gui-light-theme.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="css/dat-gui-swec.css" />
 
-    <!-- CSS Variables -->
-    <style>
-      :root {
-        --bannerBackground: linear-gradient(#414d3f, #414d3f);
-        --bannerTextColor: #ffffff;
-        --primaryColor: #414d3f;
-        --primaryColorRGB: 65, 77, 63;
-        --primaryColorAccent: #5e685c;
-        --primaryColorAccentRGB: 94, 104, 92;
-        --primaryColorDarker: #313a2f;
-        --primaryColorDarkerRGB: 49, 58, 47;
-        --secondaryColor: #e5ac02;
-        --secondaryColorRGB: 229, 172, 2;
-        --secondaryColorAccent: #e9b828;
-        --secondaryColorAccentRGB: 233, 184, 40;
-        --secondaryColorDarker: #ac8102;
-        --secondaryColorDarkerRGB: 172, 129, 2;
-        --lightColor: #bbb5a9;
-        --lightColorRGB: 187, 181, 169;
-        --lightColorAccent: #c5c0b6;
-        --lightColorAccentRGB: 197, 192, 182;
-        --lightColorDarker: #8c887f;
-        --lightColorDarkerRGB: 140, 136, 127;
-        --darkColor: #2a261e;
-        --darkColorRGB: 42, 38, 30;
-        --darkColorAccent: #4a4740;
-        --darkColorAccentRGB: 74, 71, 64;
-        --darkColorDarker: #201d17;
-        --darkColorDarkerRGB: 32, 29, 23;
-        --fontFamily: "Poppins", sans-serif;
-      }
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="images/favicon/manifest.mod.json" />
+  <meta name="msapplication-TileColor" content="#37434d" />
+  <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#37434d" />
 
-      #developer_info {
-        position: absolute;
-        width: 200px;
-        height: 300px;
-        z-index: 999;
-        bottom: 0px;
-        right: 325px;
-        background: rgba(0, 0, 0, 0.65);
-        padding: 10px;
-        border: 4px solid #adaaaa;
-        border-style: groove;
-      }
+  <!-- CSS Variables -->
+  <style>
+    :root {
+      --bannerBackground: linear-gradient(#414d3f, #414d3f);
+      --bannerTextColor: #ffffff;
+      --primaryColor: #414d3f;
+      --primaryColorRGB: 65, 77, 63;
+      --primaryColorAccent: #5e685c;
+      --primaryColorAccentRGB: 94, 104, 92;
+      --primaryColorDarker: #313a2f;
+      --primaryColorDarkerRGB: 49, 58, 47;
+      --secondaryColor: #e5ac02;
+      --secondaryColorRGB: 229, 172, 2;
+      --secondaryColorAccent: #e9b828;
+      --secondaryColorAccentRGB: 233, 184, 40;
+      --secondaryColorDarker: #ac8102;
+      --secondaryColorDarkerRGB: 172, 129, 2;
+      --lightColor: #bbb5a9;
+      --lightColorRGB: 187, 181, 169;
+      --lightColorAccent: #c5c0b6;
+      --lightColorAccentRGB: 197, 192, 182;
+      --lightColorDarker: #8c887f;
+      --lightColorDarkerRGB: 140, 136, 127;
+      --darkColor: #2a261e;
+      --darkColorRGB: 42, 38, 30;
+      --darkColorAccent: #4a4740;
+      --darkColorAccentRGB: 74, 71, 64;
+      --darkColorDarker: #201d17;
+      --darkColorDarkerRGB: 32, 29, 23;
+      --fontFamily: "Poppins", sans-serif;
+    }
 
-      #developer_info h2 {
-        color: white;
-        font-size: 15px;
-        font-weight: normal;
-        text-align: center;
-        margin: 0px;
-        padding: 0px;
-      }
+    #developer_info {
+      position: absolute;
+      width: 200px;
+      height: 300px;
+      z-index: 999;
+      bottom: 0px;
+      right: 325px;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 10px;
+      border: 4px solid #adaaaa;
+      border-style: groove;
+    }
 
-      #developer_info h3 {
-        color: white;
-        font-size: 12px;
-        margin: 0px;
-        padding: 0px;
-        line-height: 20px;
-      }
+    #developer_info h2 {
+      color: white;
+      font-size: 15px;
+      font-weight: normal;
+      text-align: center;
+      margin: 0px;
+      padding: 0px;
+    }
 
-      #developer_info p {
-        color: yellow;
-        font-size: 20px;
-        text-align: center;
-      }
+    #developer_info h3 {
+      color: white;
+      font-size: 12px;
+      margin: 0px;
+      padding: 0px;
+      line-height: 20px;
+    }
 
-      #developer_info img {
-        height: 170px;
-        margin-left: 30px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Top of screen alert area-->
-    <div class="alert" id="alert_top" role="alert" style="display: none">
-      <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <span class="content"></span>
-    </div>
+    #developer_info p {
+      color: yellow;
+      font-size: 20px;
+      text-align: center;
+    }
 
-    <div
-      id="modal-loading"
-      class="modal in fade"
-      role="dialog"
-      aria-labelledby="loadingModalLabel"
-      data-backdrop="static"
-      data-keyboard="false"
-    >
-      <div class="modal-header d-inline">
-        <h3 id="loadingModalLabel" class="text-center">Loading...</h3>
-        <div
-          class="progress progress-striped active"
-          style="height: 16px; margin-top: 15px"
-        >
-          <div class="bar" style="width: 100%"></div>
-        </div>
+    #developer_info img {
+      height: 170px;
+      margin-left: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top of screen alert area-->
+  <div class="alert" id="alert_top" role="alert" style="display: none">
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <span class="content"></span>
+  </div>
+
+  <div id="modal-loading" class="modal in fade" role="dialog" aria-labelledby="loadingModalLabel" data-backdrop="static"
+    data-keyboard="false">
+    <div class="modal-header d-inline">
+      <h3 id="loadingModalLabel" class="text-center">Loading...</h3>
+      <div class="progress progress-striped active" style="height: 16px; margin-top: 15px">
+        <div class="bar" style="width: 100%"></div>
       </div>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+        <img class="w-50 logo" src="images/logo.png" alt="Backwoods Buildings & Truss LLC. logo" />
+      </div>
+    </div>
+  </div>
+  <div id="modal-success" class="modal hide fade" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <strong>x</strong>
+      </button>
+      <h3 id="successModalLabel">Thank you!</h3>
+    </div>
+    <div class="modal-body"></div>
+  </div>
+  <script>
+    $("#modal-loading").modal("show");
+  </script>
+
+  <!-- Top of screen alert area-->
+  <div class="alert" id="alert_top" role="alert" style="display: none">
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <span class="content"><strong>NOTICE: </strong>This is dev</span>
+  </div>
+
+  <div id="modal-quote" class="modal hide fade" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <strong>x</strong>
+      </button>
+      <h3 id="quoteModalLabel">Request Quote</h3>
+    </div>
+    <form action="#" method="post" enctype="multipart/form-data" name="form-quote" class="request-quote"
+      id="request-quote">
       <div class="modal-body">
-        <div class="text-center">
-          <img
-            class="w-50 logo"
-            src="images/logo.png"
-            alt="Backwoods Buildings & Truss LLC. logo"
-          />
+        <div class="group">
+          <div class="column half left">
+            <label for="firstname-quote" class="with-placeholder">First name</label>
+            <input type="text" placeholder="First name" name="firstname" id="firstname-quote" class="firstname required"
+              value="" data-msg-required="Please enter your first name" autocomplete="off" /><br />
+          </div>
+          <div class="column half right">
+            <label for="lastname-quote" class="with-placeholder">Last name</label>
+            <input type="text" placeholder="Last name" name="lastname" id="lastname-quote" class="lastname required"
+              value="" data-msg-required="Please enter your last name" autocomplete="off" /><br />
+          </div>
         </div>
-      </div>
-    </div>
-    <div
-      id="modal-success"
-      class="modal hide fade"
-      role="dialog"
-      aria-labelledby="successModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-labelledby="quoteModalLabel"
-          aria-hidden="true"
-        >
-          <strong>x</strong>
-        </button>
-        <h3 id="successModalLabel">Thank you!</h3>
-      </div>
-      <div class="modal-body"></div>
-    </div>
-    <script>
-      $("#modal-loading").modal("show");
-    </script>
-
-    <!-- Top of screen alert area-->
-    <div class="alert" id="alert_top" role="alert" style="display: none">
-      <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <span class="content"><strong>NOTICE: </strong>This is dev</span>
-    </div>
-
-    <div
-      id="modal-quote"
-      class="modal hide fade"
-      role="dialog"
-      aria-hidden="true"
-    >
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-labelledby="quoteModalLabel"
-          aria-hidden="true"
-        >
-          <strong>x</strong>
-        </button>
-        <h3 id="quoteModalLabel">Request Quote</h3>
-      </div>
-      <form
-        action="#"
-        method="post"
-        enctype="multipart/form-data"
-        name="form-quote"
-        class="request-quote"
-        id="request-quote"
-      >
-        <div class="modal-body">
-          <div class="group">
-            <div class="column half left">
-              <label for="firstname-quote" class="with-placeholder"
-                >First name</label
-              >
-              <input
-                type="text"
-                placeholder="First name"
-                name="firstname"
-                id="firstname-quote"
-                class="firstname required"
-                value=""
-                data-msg-required="Please enter your first name"
-                autocomplete="off"
-              /><br />
-            </div>
-            <div class="column half right">
-              <label for="lastname-quote" class="with-placeholder"
-                >Last name</label
-              >
-              <input
-                type="text"
-                placeholder="Last name"
-                name="lastname"
-                id="lastname-quote"
-                class="lastname required"
-                value=""
-                data-msg-required="Please enter your last name"
-                autocomplete="off"
-              /><br />
-            </div>
+        <div class="group">
+          <div class="column half left">
+            <label for="email-quote" class="with-placeholder">Email</label>
+            <input type="text" placeholder="Email" name="email" id="email-quote" class="email required" value=""
+              data-msg-required="Please enter your email" autocomplete="off" /><br />
           </div>
-          <div class="group">
-            <div class="column half left">
-              <label for="email-quote" class="with-placeholder">Email</label>
-              <input
-                type="text"
-                placeholder="Email"
-                name="email"
-                id="email-quote"
-                class="email required"
-                value=""
-                data-msg-required="Please enter your email"
-                autocomplete="off"
-              /><br />
-            </div>
-            <div class="column half right">
-              <label for="phone" class="with-placeholder">Phone</label>
-              <input
-                type="text"
-                placeholder="Phone"
-                name="phone"
-                id="phone"
-                class="phone phoneUS required"
-                value=""
-                data-msg-required="Please enter a phone number"
-                autocomplete="off"
-              /><br />
-            </div>
+          <div class="column half right">
+            <label for="phone" class="with-placeholder">Phone</label>
+            <input type="text" placeholder="Phone" name="phone" id="phone" class="phone phoneUS required" value=""
+              data-msg-required="Please enter a phone number" autocomplete="off" /><br />
           </div>
+        </div>
 
-          <div class="column">
-            <label for="address" class="with-placeholder">Address</label>
-            <input
-              type="text"
-              placeholder="Address"
-              name="address"
-              id="address"
-              class="address required"
-              value=""
-              data-msg-required="Please enter your address"
-              autocomplete="off"
-            /><br />
+        <div class="column">
+          <label for="address" class="with-placeholder">Address</label>
+          <input type="text" placeholder="Address" name="address" id="address" class="address required" value=""
+            data-msg-required="Please enter your address" autocomplete="off" /><br />
+        </div>
+
+        <div class="group">
+          <div class="column half left">
+            <label for="city" class="with-placeholder">City</label>
+            <input type="text" placeholder="City" name="city" id="city" class="city required" value=""
+              data-msg-required="Please enter your city" autocomplete="off" /><br />
           </div>
-
-          <div class="group">
-            <div class="column half left">
-              <label for="city" class="with-placeholder">City</label>
-              <input
-                type="text"
-                placeholder="City"
-                name="city"
-                id="city"
-                class="city required"
-                value=""
-                data-msg-required="Please enter your city"
-                autocomplete="off"
-              /><br />
-            </div>
-            <div class="column quarter middle">
-              <label for="state" class="with-placeholder">State</label>
-              <!--<input type="text" placeholder="State" name="state" id="state" class="state stateUS required" value="" data-msg-required="state required" autocomplete="off"><br>-->
-              <select
-                type="text"
-                placeholder="State"
-                name="state"
-                id="state"
-                class="state stateUS required"
-                value=""
-                data-msg-required="State required"
-                autocomplete="off"
-              >
-                <option value="" selected disabled hidden>State</option>
-                <option value="Alabama">Alabama</option>
-                <option value="Alaska">Alaska</option>
-                <option value="Arizona">Arizona</option>
-                <option value="Arkansas">Arkansas</option>
-                <option value="California">California</option>
-                <option value="Colorado">Colorado</option>
-                <option value="Connecticut">Connecticut</option>
-                <option value="Delaware">Delaware</option>
-                <option value="District Of Columbia">
-                  District Of Columbia
-                </option>
-                <option value="Florida">Florida</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Hawaii">Hawaii</option>
-                <option value="Idaho">Idaho</option>
-                <option value="Illinois">Illinois</option>
-                <option value="Indiana">Indiana</option>
-                <option value="Iowa">Iowa</option>
-                <option value="Kansas">Kansas</option>
-                <option value="Kentucky">Kentucky</option>
-                <option value="Louisiana">Louisiana</option>
-                <option value="Maine">Maine</option>
-                <option value="Maryland">Maryland</option>
-                <option value="Massachusetts">Massachusetts</option>
-                <option value="Michigan">Michigan</option>
-                <option value="Minnesota">Minnesota</option>
-                <option value="Mississippi">Mississippi</option>
-                <option value="Missouri">Missouri</option>
-                <option value="Montana">Montana</option>
-                <option value="Nebraska">Nebraska</option>
-                <option value="Nevada">Nevada</option>
-                <option value="New Hampshire">New Hampshire</option>
-                <option value="New Jersey">New Jersey</option>
-                <option value="New Mexico">New Mexico</option>
-                <option value="New York">New York</option>
-                <option value="North Carolina">North Carolina</option>
-                <option value="North Dakota">North Dakota</option>
-                <option value="Ohio">Ohio</option>
-                <option value="Oklahoma">Oklahoma</option>
-                <option value="Oregon">Oregon</option>
-                <option value="Pennsylvania">Pennsylvania</option>
-                <option value="Rhode Island">Rhode Island</option>
-                <option value="South Carolina">South Carolina</option>
-                <option value="South Dakota">South Dakota</option>
-                <option value="Tennessee">Tennessee</option>
-                <option value="Texas">Texas</option>
-                <option value="Utah">Utah</option>
-                <option value="Vermont">Vermont</option>
-                <option value="Virginia">Virginia</option>
-                <option value="Washington">Washington</option>
-                <option value="West Virginia">West Virginia</option>
-                <option value="Wisconsin">Wisconsin</option>
-                <option value="Wyoming">Wyoming</option>
-              </select>
-            </div>
-            <div class="column quarter right">
-              <label for="zip" class="with-placeholder">Zip</label>
-              <input
-                type="text"
-                placeholder="Zip"
-                name="zip"
-                id="zip"
-                class="zip required zipcodeUS"
-                value=""
-                data-msg-required="Please enter zip"
-                autocomplete="off"
-              /><br />
-            </div>
+          <div class="column quarter middle">
+            <label for="state" class="with-placeholder">State</label>
+            <!--<input type="text" placeholder="State" name="state" id="state" class="state stateUS required" value="" data-msg-required="state required" autocomplete="off"><br>-->
+            <select type="text" placeholder="State" name="state" id="state" class="state stateUS required" value=""
+              data-msg-required="State required" autocomplete="off">
+              <option value="" selected disabled hidden>State</option>
+              <option value="Alabama">Alabama</option>
+              <option value="Alaska">Alaska</option>
+              <option value="Arizona">Arizona</option>
+              <option value="Arkansas">Arkansas</option>
+              <option value="California">California</option>
+              <option value="Colorado">Colorado</option>
+              <option value="Connecticut">Connecticut</option>
+              <option value="Delaware">Delaware</option>
+              <option value="District Of Columbia">
+                District Of Columbia
+              </option>
+              <option value="Florida">Florida</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Hawaii">Hawaii</option>
+              <option value="Idaho">Idaho</option>
+              <option value="Illinois">Illinois</option>
+              <option value="Indiana">Indiana</option>
+              <option value="Iowa">Iowa</option>
+              <option value="Kansas">Kansas</option>
+              <option value="Kentucky">Kentucky</option>
+              <option value="Louisiana">Louisiana</option>
+              <option value="Maine">Maine</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="Michigan">Michigan</option>
+              <option value="Minnesota">Minnesota</option>
+              <option value="Mississippi">Mississippi</option>
+              <option value="Missouri">Missouri</option>
+              <option value="Montana">Montana</option>
+              <option value="Nebraska">Nebraska</option>
+              <option value="Nevada">Nevada</option>
+              <option value="New Hampshire">New Hampshire</option>
+              <option value="New Jersey">New Jersey</option>
+              <option value="New Mexico">New Mexico</option>
+              <option value="New York">New York</option>
+              <option value="North Carolina">North Carolina</option>
+              <option value="North Dakota">North Dakota</option>
+              <option value="Ohio">Ohio</option>
+              <option value="Oklahoma">Oklahoma</option>
+              <option value="Oregon">Oregon</option>
+              <option value="Pennsylvania">Pennsylvania</option>
+              <option value="Rhode Island">Rhode Island</option>
+              <option value="South Carolina">South Carolina</option>
+              <option value="South Dakota">South Dakota</option>
+              <option value="Tennessee">Tennessee</option>
+              <option value="Texas">Texas</option>
+              <option value="Utah">Utah</option>
+              <option value="Vermont">Vermont</option>
+              <option value="Virginia">Virginia</option>
+              <option value="Washington">Washington</option>
+              <option value="West Virginia">West Virginia</option>
+              <option value="Wisconsin">Wisconsin</option>
+              <option value="Wyoming">Wyoming</option>
+            </select>
           </div>
+          <div class="column quarter right">
+            <label for="zip" class="with-placeholder">Zip</label>
+            <input type="text" placeholder="Zip" name="zip" id="zip" class="zip required zipcodeUS" value=""
+              data-msg-required="Please enter zip" autocomplete="off" /><br />
+          </div>
+        </div>
 
-          <!-- custom form fields -->
-          <!--<div class="group">
+        <!-- custom form fields -->
+        <!--<div class="group">
 						<div class="column">
 							<label for="customFormField1" class="with-placeholder">Expected Timeline Start</label>
 							<select type="text" name="customFormField1" id="customFormField1" class="required" value="" data-msg-required="Select a start timeline" autocomplete="off">
@@ -515,560 +308,336 @@
 							</select>
 						</div>
 					</div>-->
-          <!-- custom form fields -->
+        <!-- custom form fields -->
 
-          <div class="group">
-            <label for="quoteNotes"
-              >Tell Us About Your Building (optional)</label
-            >
-            <textarea
-              type="text"
-              name="quoteNotes"
-              id="quoteNotes"
-              class="notes"
-              value=""
-              rows="3"
-            ></textarea
-            ><br />
+        <div class="group">
+          <label for="quoteNotes">Tell Us About Your Building (optional)</label>
+          <textarea type="text" name="quoteNotes" id="quoteNotes" class="notes" value="" rows="3"></textarea><br />
+        </div>
+
+        <input type="hidden" name="action" value="quote" />
+      </div>
+      <p class="fail" style="display: none"></p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Submit <i class="fas fa-clipboard-check"></i><i class="status-icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="modal-share" class="modal hide fade" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-labelledby="shareModalLabel" aria-hidden="true">
+        <strong>x</strong>
+      </button>
+      <h3 id="shareModalLabel">Share your creation</h3>
+    </div>
+    <form action="#" method="post" enctype="multipart/form-data" name="form-share" class="request-share"
+      id="request-share">
+      <div class="modal-body">
+        <label for="shareEmail">Who would you like to share with? (email)</label>
+        <input type="text" name="shareEmail" id="shareEmail" class="email required" placeholder="joe@email.com" value=""
+          data-msg-required="Please enter an email to share with" autocomplete="off" /><br />
+
+        <div class="group">
+          <div class="column half left">
+            <label for="firstname-share">Your first name</label>
+            <input type="text" name="firstname" id="firstname-share" class="firstname required" value=""
+              data-msg-required="Please enter your first name" autocomplete="off" /><br />
           </div>
-
-          <input type="hidden" name="action" value="quote" />
-        </div>
-        <p class="fail" style="display: none"></p>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="submit" class="btn btn-primary">
-            Submit <i class="fas fa-clipboard-check"></i
-            ><i class="status-icon"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <div
-      id="modal-share"
-      class="modal hide fade"
-      role="dialog"
-      aria-hidden="true"
-    >
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-labelledby="shareModalLabel"
-          aria-hidden="true"
-        >
-          <strong>x</strong>
-        </button>
-        <h3 id="shareModalLabel">Share your creation</h3>
-      </div>
-      <form
-        action="#"
-        method="post"
-        enctype="multipart/form-data"
-        name="form-share"
-        class="request-share"
-        id="request-share"
-      >
-        <div class="modal-body">
-          <label for="shareEmail"
-            >Who would you like to share with? (email)</label
-          >
-          <input
-            type="text"
-            name="shareEmail"
-            id="shareEmail"
-            class="email required"
-            placeholder="joe@email.com"
-            value=""
-            data-msg-required="Please enter an email to share with"
-            autocomplete="off"
-          /><br />
-
-          <div class="group">
-            <div class="column half left">
-              <label for="firstname-share">Your first name</label>
-              <input
-                type="text"
-                name="firstname"
-                id="firstname-share"
-                class="firstname required"
-                value=""
-                data-msg-required="Please enter your first name"
-                autocomplete="off"
-              /><br />
-            </div>
-            <div class="column half right">
-              <label for="lastname-share">Your last name</label>
-              <input
-                type="text"
-                name="lastname"
-                id="lastname-share"
-                class="lastname required"
-                value=""
-                data-msg-required="Please enter your last name"
-                autocomplete="off"
-              /><br />
-            </div>
+          <div class="column half right">
+            <label for="lastname-share">Your last name</label>
+            <input type="text" name="lastname" id="lastname-share" class="lastname required" value=""
+              data-msg-required="Please enter your last name" autocomplete="off" /><br />
           </div>
-
-          <label for="email-share">Your email address</label>
-          <input
-            type="text"
-            name="email"
-            id="email-share"
-            class="email required"
-            value=""
-            data-msg-required="Please enter your email address"
-            autocomplete="off"
-          /><br />
-
-          <label for="shareNotes">Notes (optional)</label>
-          <textarea
-            type="text"
-            name="shareNotes"
-            id="shareNotes"
-            class="notes"
-            value=""
-            rows="3"
-          ></textarea
-          ><br />
-
-          <input type="hidden" name="action" value="share" />
         </div>
-        <p class="fail" style="display: none"></p>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="submit" class="btn btn-primary">
-            Share <i class="fas fa-share-alt-square"></i
-            ><i class="status-icon"></i>
-          </button>
-        </div>
-      </form>
-    </div>
 
-    <div
-      id="modal-save"
-      class="modal hide fade"
-      role="dialog"
-      aria-hidden="true"
-    >
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-labelledby="saveModalLabel"
-          aria-hidden="true"
-        >
-          <strong>x</strong>
-        </button>
-        <h3 id="saveModalLabel">Nice looking building!</h3>
+        <label for="email-share">Your email address</label>
+        <input type="text" name="email" id="email-share" class="email required" value=""
+          data-msg-required="Please enter your email address" autocomplete="off" /><br />
+
+        <label for="shareNotes">Notes (optional)</label>
+        <textarea type="text" name="shareNotes" id="shareNotes" class="notes" value="" rows="3"></textarea><br />
+
+        <input type="hidden" name="action" value="share" />
       </div>
-      <form
-        action="#"
-        method="post"
-        enctype="multipart/form-data"
-        name="form-save"
-        class="request-save"
-        id="request-save"
-      >
-        <div class="modal-body">
-          <label for="saveEmail">Email my saved design</label>
-          <input
-            type="text"
-            name="saveEmail"
-            id="saveEmail"
-            class="email required"
-            placeholder="joe@email.com"
-            value=""
-            data-msg-required="Please enter your email address"
-            autocomplete="off"
-          /><br />
-
-          <label for="saveNotes">Notes (optional)</label>
-          <textarea
-            type="text"
-            name="saveNotes"
-            id="saveNotes"
-            class="notes"
-            value=""
-            rows="3"
-          ></textarea
-          ><br />
-
-          <input type="hidden" name="action" value="save" />
-        </div>
-        <p class="fail" style="display: none"></p>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="submit" class="btn btn-primary">
-            Save <i class="fas fa-save"></i><i class="status-icon"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <div id="popupContainer"></div>
-    <canvas id="line" width="100%" height="100%"></canvas>
-    <div id="popup">
-      <div class="scrollContainer">
-        <div id="xpos" class="row">
-          To Building Center:<br /><input
-            type="number"
-            step="1"
-            id="xPosFt"
-            name="xPosFt"
-            maxlength="4"
-          />ft.
-          <input
-            type="number"
-            min="-11"
-            max="11"
-            step="1"
-            id="xPosIn"
-            name="xPosIn"
-            class="inches"
-            maxlength="3"
-          />in.
-        </div>
-        <div id="zpos" class="row">
-          To North Wall:<br /><input
-            type="number"
-            step="1"
-            id="zPosFt"
-            name="zPosFt"
-            maxlength="4"
-          />ft.
-          <input
-            type="number"
-            min="-11"
-            max="11"
-            step="1"
-            id="zPosIn"
-            name="zPosIn"
-            class="inches"
-            maxlength="3"
-          />in.
-        </div>
-        <div id="yposTop" class="row">
-          Top of item to Ground:<br /><input
-            type="number"
-            step="1"
-            id="yPosTopFt"
-            name="yPosTopFt"
-            maxlength="4"
-          />ft.
-          <input
-            type="number"
-            min="0"
-            max="11"
-            step="1"
-            id="yPosTopIn"
-            name="yPosTopIn"
-            class="inches"
-            maxlength="3"
-          />in.
-        </div>
-        <div id="ypos" class="row">
-          Center to Ground:<br /><input
-            type="number"
-            step="1"
-            id="yPosFt"
-            name="yPosFt"
-            maxlength="4"
-          />ft.
-          <input
-            type="number"
-            min="0"
-            max="11"
-            step="1"
-            id="yPosIn"
-            name="yPosIn"
-            class="inches"
-            maxlength="3"
-          />in.
-        </div>
-        <div id="xsca" class="row">
-          W
-          <input
-            type="number"
-            step="1"
-            id="xScaFt"
-            name="xScaFt"
-            maxlength="3"
-          />ft.
-          <span class="inches"
-            ><input
-              type="number"
-              min="0"
-              max="11"
-              step="1"
-              id="xScaIn"
-              name="xScaIn"
-              class="inches"
-              maxlength="2"
-            />in.</span
-          >
-        </div>
-        <div id="zsca" class="row">
-          D
-          <input
-            type="number"
-            step="1"
-            id="zScaFt"
-            name="zScaFt"
-            maxlength="3"
-          />ft.
-          <span class="inches"
-            ><input
-              type="number"
-              min="0"
-              max="11"
-              step="1"
-              id="zScaIn"
-              name="zScaIn"
-              class="inches"
-              maxlength="2"
-            />in.</span
-          >
-        </div>
-        <div id="ysca" class="row">
-          H
-          <input
-            type="number"
-            step="1"
-            id="yScaFt"
-            name="yScaFt"
-            maxlength="3"
-          />ft.
-          <span class="inches"
-            ><input
-              type="number"
-              min="0"
-              max="11"
-              step="1"
-              id="yScaIn"
-              name="yScaIn"
-              class="inches"
-              maxlength="2"
-            />in.</span
-          >
-        </div>
-
-        <div id="sizeRow" class="row">
-          Size
-          <select id="size" name="size"></select>
-        </div>
-
-        <div id="ceilingHeightRow" class="row">
-          Ceiling Height
-          <select id="ceilingHeight" name="ceilingHeight">
-            <option value="7">7' 0"</option>
-            <option value="7.5">7' 6"</option>
-            <option value="8">8' 0"</option>
-            <option value="8.5">8' 6"</option>
-            <option value="9">9' 0"</option>
-          </select>
-        </div>
-
-        <div id="porchPitchRow" class="row">
-          Roof Pitch
-          <select id="porchPitch" name="porchPitch">
-            <option value="3">3:12</option>
-            <option value="4">4:12</option>
-            <option value="6">6:12</option>
-          </select>
-        </div>
-
-        <div id="porchDepthRow" class="row">
-          Depth
-          <select id="porchDepth" name="porchDepth">
-            <option value="6">6'</option>
-            <option value="9">9'</option>
-            <option value="12">12'</option>
-            <option value="18">18'</option>
-          </select>
-        </div>
-
-        <div id="porchOverhangRow" class="row">
-          Roof Overhang
-          <select id="porchOverhang" name="porchOverhang">
-            <option value="0">None</option>
-            <option value="12">12"</option>
-            <option value="18">18"</option>
-            <option value="24">24"</option>
-          </select>
-        </div>
-
-        <div id="wallMaterialRow" class="row">
-          Material
-          <select id="wallMaterial" name="wallMaterial">
-            <option value="Steel">Steel</option>
-            <option value="Half Wood">Half Wood</option>
-            <option value="Wood">Wood</option>
-            <option value="Drywall">Drywall</option>
-          </select>
-        </div>
-
-        <div id="gridRow" class="row checkbox">
-          <label for="grid">Grid</label
-          ><input type="checkbox" id="grid" name="grid" />
-        </div>
-        <div id="shuttersRow" class="row checkbox">
-          <label for="shutters">Shutters</label
-          ><input type="checkbox" id="shutters" name="shutters" />
-        </div>
-        <div id="enclosedRow" class="row checkbox">
-          <label for="enclosed">Enclosed</label
-          ><input type="checkbox" id="enclosed" name="enclosed" checked />
-        </div>
-        <div id="miterRow" class="row checkbox">
-          <label for="miter">Post Miter</label
-          ><input type="checkbox" id="miter" name="miter" />
-        </div>
-        <div id="wrapRow" class="row checkbox">
-          <label for="wrap">Post Wrap</label
-          ><input type="checkbox" id="wrap" name="wrap" />
-        </div>
-        <div id="postsRow" class="row checkbox">
-          <label for="posts">Posts</label
-          ><input type="checkbox" id="posts" name="posts" />
-        </div>
-        <div id="concreteRow" class="row checkbox">
-          <label for="concrete">Concrete</label
-          ><input type="checkbox" id="concrete" name="concrete" />
-        </div>
-        <div id="rotateRow" class="row">
-          <button id="rotateLeftButton" class="btn btn-primary">
-            Rotate <i class="fas fa-undo"></i>
-          </button>
-          <button id="rotateRightButton" class="btn btn-primary">
-            <i class="fas fa-redo"></i> Rotate
-          </button>
-        </div>
-        <button id="doorSwingButton" class="btn btn-primary">
-          Door Swing <i class="fas fa-sync-alt"></i>
+      <p class="fail" style="display: none"></p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
         </button>
-        <button id="copyButton" class="btn btn-primary">
-          Copy <i class="fas fa-copy"></i>
-        </button>
-        <button id="updateItemButton" class="btn btn-success">
-          Update <i class="fas fa-check"></i>
-        </button>
-        <button id="deleteItemButton" class="btn btn-danger">
-          <i class="fas fa-trash-alt"></i>
+        <button type="submit" class="btn btn-primary">
+          Share <i class="fas fa-share-alt-square"></i><i class="status-icon"></i>
         </button>
       </div>
-      <i id="closePopupWindowButton" class="fas fa-window-close fa-lg"></i>
+    </form>
+  </div>
+
+  <div id="modal-save" class="modal hide fade" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-labelledby="saveModalLabel" aria-hidden="true">
+        <strong>x</strong>
+      </button>
+      <h3 id="saveModalLabel">Nice looking building!</h3>
     </div>
-    <script>
-      $("#popup").draggable({
-        containment: "#popupContainer", // was '#builder canvas'
-      });
+    <form action="#" method="post" enctype="multipart/form-data" name="form-save" class="request-save"
+      id="request-save">
+      <div class="modal-body">
+        <label for="saveEmail">Email my saved design</label>
+        <input type="text" name="saveEmail" id="saveEmail" class="email required" placeholder="joe@email.com" value=""
+          data-msg-required="Please enter your email address" autocomplete="off" /><br />
 
-      // Disable draggable on mobile
-      if ($(window).width() <= 768) {
-        $("#popup").draggable("disable");
-      }
-    </script>
+        <label for="saveNotes">Notes (optional)</label>
+        <textarea type="text" name="saveNotes" id="saveNotes" class="notes" value="" rows="3"></textarea><br />
 
-    <div id="info">
-      <span class="iconButtons">
-        <i class="iconButton far fa-question-circle" id="helpButton"></i>
-        <i class="iconButton fas fa-undo" id="resetButton"></i>
-      </span>
+        <input type="hidden" name="action" value="save" />
+      </div>
+      <p class="fail" style="display: none"></p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Save <i class="fas fa-save"></i><i class="status-icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
 
-      <span class="iconButtons right"></span>
+  <div id="popupContainer"></div>
+  <canvas id="line" width="100%" height="100%"></canvas>
+  <div id="popup">
+    <div class="scrollContainer">
+      <div id="xpos" class="row">
+        To Building Center:<br /><input type="number" step="1" id="xPosFt" name="xPosFt" maxlength="4" />ft.
+        <input type="number" min="-11" max="11" step="1" id="xPosIn" name="xPosIn" class="inches" maxlength="3" />in.
+      </div>
+      <div id="zpos" class="row">
+        To North Wall:<br /><input type="number" step="1" id="zPosFt" name="zPosFt" maxlength="4" />ft.
+        <input type="number" min="-11" max="11" step="1" id="zPosIn" name="zPosIn" class="inches" maxlength="3" />in.
+      </div>
+      <div id="yposTop" class="row">
+        Top of item to Ground:<br /><input type="number" step="1" id="yPosTopFt" name="yPosTopFt" maxlength="4" />ft.
+        <input type="number" min="0" max="11" step="1" id="yPosTopIn" name="yPosTopIn" class="inches"
+          maxlength="3" />in.
+      </div>
+      <div id="ypos" class="row">
+        Center to Ground:<br /><input type="number" step="1" id="yPosFt" name="yPosFt" maxlength="4" />ft.
+        <input type="number" min="0" max="11" step="1" id="yPosIn" name="yPosIn" class="inches" maxlength="3" />in.
+      </div>
+      <div id="xsca" class="row">
+        W
+        <input type="number" step="1" id="xScaFt" name="xScaFt" maxlength="3" />ft.
+        <span class="inches"><input type="number" min="0" max="11" step="1" id="xScaIn" name="xScaIn" class="inches"
+            maxlength="2" />in.</span>
+      </div>
+      <div id="zsca" class="row">
+        D
+        <input type="number" step="1" id="zScaFt" name="zScaFt" maxlength="3" />ft.
+        <span class="inches"><input type="number" min="0" max="11" step="1" id="zScaIn" name="zScaIn" class="inches"
+            maxlength="2" />in.</span>
+      </div>
+      <div id="ysca" class="row">
+        H
+        <input type="number" step="1" id="yScaFt" name="yScaFt" maxlength="3" />ft.
+        <span class="inches"><input type="number" min="0" max="11" step="1" id="yScaIn" name="yScaIn" class="inches"
+            maxlength="2" />in.</span>
+      </div>
+
+      <div id="sizeRow" class="row">
+        Size
+        <select id="size" name="size"></select>
+      </div>
+
+      <div id="ceilingHeightRow" class="row">
+        Ceiling Height
+        <select id="ceilingHeight" name="ceilingHeight">
+          <option value="7">7' 0"</option>
+          <option value="7.5">7' 6"</option>
+          <option value="8">8' 0"</option>
+          <option value="8.5">8' 6"</option>
+          <option value="9">9' 0"</option>
+        </select>
+      </div>
+
+      <div id="porchPitchRow" class="row">
+        Roof Pitch
+        <select id="porchPitch" name="porchPitch">
+          <option value="3">3:12</option>
+          <option value="4">4:12</option>
+          <option value="6">6:12</option>
+        </select>
+      </div>
+
+      <div id="porchDepthRow" class="row">
+        Depth
+        <select id="porchDepth" name="porchDepth">
+          <option value="6">6'</option>
+          <option value="9">9'</option>
+          <option value="12">12'</option>
+          <option value="18">18'</option>
+        </select>
+      </div>
+
+      <div id="porchOverhangRow" class="row">
+        Roof Overhang
+        <select id="porchOverhang" name="porchOverhang">
+          <option value="0">None</option>
+          <option value="12">12"</option>
+          <option value="18">18"</option>
+          <option value="24">24"</option>
+        </select>
+      </div>
+
+      <div id="wallMaterialRow" class="row">
+        Material
+        <select id="wallMaterial" name="wallMaterial">
+          <option value="Steel">Steel</option>
+          <option value="Half Wood">Half Wood</option>
+          <option value="Wood">Wood</option>
+          <option value="Drywall">Drywall</option>
+        </select>
+      </div>
+
+      <div id="gridRow" class="row checkbox">
+        <label for="grid">Grid</label><input type="checkbox" id="grid" name="grid" />
+      </div>
+      <div id="shuttersRow" class="row checkbox">
+        <label for="shutters">Shutters</label><input type="checkbox" id="shutters" name="shutters" />
+      </div>
+      <div id="enclosedRow" class="row checkbox">
+        <label for="enclosed">Enclosed</label><input type="checkbox" id="enclosed" name="enclosed" checked />
+      </div>
+      <div id="miterRow" class="row checkbox">
+        <label for="miter">Post Miter</label><input type="checkbox" id="miter" name="miter" />
+      </div>
+      <div id="wrapRow" class="row checkbox">
+        <label for="wrap">Post Wrap</label><input type="checkbox" id="wrap" name="wrap" />
+      </div>
+      <div id="postsRow" class="row checkbox">
+        <label for="posts">Posts</label><input type="checkbox" id="posts" name="posts" />
+      </div>
+      <div id="concreteRow" class="row checkbox">
+        <label for="concrete">Concrete</label><input type="checkbox" id="concrete" name="concrete" />
+      </div>
+      <div id="rotateRow" class="row">
+        <button id="rotateLeftButton" class="btn btn-primary">
+          Rotate <i class="fas fa-undo"></i>
+        </button>
+        <button id="rotateRightButton" class="btn btn-primary">
+          <i class="fas fa-redo"></i> Rotate
+        </button>
+      </div>
+      <button id="doorSwingButton" class="btn btn-primary">
+        Door Swing <i class="fas fa-sync-alt"></i>
+      </button>
+      <button id="copyButton" class="btn btn-primary">
+        Copy <i class="fas fa-copy"></i>
+      </button>
+      <button id="updateItemButton" class="btn btn-success">
+        Update <i class="fas fa-check"></i>
+      </button>
+      <button id="deleteItemButton" class="btn btn-danger">
+        <i class="fas fa-trash-alt"></i>
+      </button>
     </div>
-    <div id="overlay"></div>
-    <div id="help" class="noselect">
-      <i class="far fa-window-close" id="closeButton"></i>
-      <h1>Backwoods Buildings & Truss LLC.</h1>
-      <h2>3D Designer Instructions:</h2>
-      <ol>
-        <li>Click or touch and drag to rotate.</li>
-        <li>Scroll or pinch to zoom in and out.</li>
-        <li>Right Click or 3 finger swipe to move.</li>
-        <li>Click or touch on doors and windows for additional options.</li>
-      </ol>
-      <a
-        href="https://onthez.com/"
-        target="_blank"
-        style="display: block; text-decoration: none"
-        ><i
-          class="fas fa-cubes fa-3x"
-          style="
+    <i id="closePopupWindowButton" class="fas fa-window-close fa-lg"></i>
+  </div>
+  <script>
+    $("#popup").draggable({
+      containment: "#popupContainer", // was '#builder canvas'
+    });
+
+    // Disable draggable on mobile
+    if ($(window).width() <= 768) {
+      $("#popup").draggable("disable");
+    }
+  </script>
+
+  <div id="info">
+    <span class="iconButtons">
+      <button id="back" style="
+    border: none;
+    background-color: transparent;">
+        <a href=" https://mydesignerplus.com/">
+          <img id="printLogo" width="40" height="40" src="images/back-svgrepo-com.svg" alt="Back">
+          <!-- <i class="fas fa-home"></i> Home -->
+        </a>
+      </button>
+      <i class="iconButton far fa-question-circle" id="helpButton"></i>
+      <i class="iconButton fas fa-undo" id="resetButton"></i>
+    </span>
+
+    <span class="iconButtons right"></span>
+  </div>
+  <div id="overlay"></div>
+  <div id="help" class="noselect">
+    <i class="far fa-window-close" id="closeButton"></i>
+    <h1>Backwoods Buildings & Truss LLC.</h1>
+    <h2>3D Designer Instructions:</h2>
+    <ol>
+      <li>Click or touch and drag to rotate.</li>
+      <li>Scroll or pinch to zoom in and out.</li>
+      <li>Right Click or 3 finger swipe to move.</li>
+      <li>Click or touch on doors and windows for additional options.</li>
+    </ol>
+    <a href="https://onthez.com/" target="_blank" style="display: block; text-decoration: none"><i
+        class="fas fa-cubes fa-3x" style="
             color: #bbb;
             display: block;
             margin-top: 10px;
             margin-left: auto;
             margin-right: auto;
-          "
-        ></i
-        >3D configurators by ON THE Z</a
-      >
-    </div>
+          "></i>3D configurators by ON THE Z</a>
+  </div>
 
-    <div class="print">
-      <table class="paging">
-        <thead class="header">
-          <tr>
-            <td>
-              <!-- repeating header at top of all pages -->
-              <img
-                id="printLogo"
-                src="images/logo.png"
-                alt="Backwoods Buildings & Truss LLC. logo"
-              />
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="print-content">
-              <!-- print content begin -->
-              <div class="print-content-image" id="printImage"></div>
-              <div class="print-content-text" id="printText"></div>
-              <div class="print-content-table" id="printTable"></div>
-              <!-- print content end -->
-            </td>
-          </tr>
-        </tbody>
-        <tfoot class="footer">
-          <tr>
-            <td>&nbsp;</td>
-          </tr>
-        </tfoot>
-      </table>
+  <div class="print">
+    <table class="paging">
+      <thead class="header">
+        <tr>
+          <td>
+            <!-- repeating header at top of all pages -->
+            <img id="printLogo" src="images/logo.png" alt="Backwoods Buildings & Truss LLC. logo" />
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="print-content">
+            <!-- print content begin -->
+            <div class="print-content-image" id="printImage"></div>
+            <div class="print-content-text" id="printText"></div>
+            <div class="print-content-table" id="printTable"></div>
+            <!-- print content end -->
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="footer">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </tfoot>
+    </table>
 
-      <footer class="footer">
-        <!-- repeating footer at the bottom of all pages -->
-        backwoodsbuildings.net &starf; (850) 676-4903<br />
-        1240 South Blvd. Chipley, FL 32428
-      </footer>
-    </div>
-    <!--div id="developer_info">
+    <footer class="footer">
+      <!-- repeating footer at the bottom of all pages -->
+      backwoodsbuildings.net &starf; (850) 676-4903<br />
+      1240 South Blvd. Chipley, FL 32428
+    </footer>
+  </div>
+  <!--div id="developer_info">
 			<h2>Version : 0.95</h2>
 			<h3>Developer information :</h3>
 			<p>Hrabovyi Vadym</p>
 			<a>https://github.com/miracle-soft-expert</a>
 			<img src="images/dev_photo.jpg">
 		</div-->
-    <script
-      type="text/javascript"
-      data-version="1.2.3"
-      data-company-name="Backwoods Buildings & Truss LLC."
-      data-tool-name="3D Designer"
-      data-localization="US"
-      src="js/main.js"
-    ></script>
-  </body>
+  <script type="text/javascript" data-version="1.2.3" data-company-name="Backwoods Buildings & Truss LLC."
+    data-tool-name="3D Designer" data-localization="US" src="js/main.js"></script>
+</body>
+
 </html>

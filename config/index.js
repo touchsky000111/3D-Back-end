@@ -7,5 +7,5 @@ module.exports = {
     REFRESH_TOKEN_EXPIRE_TIME: '7d',
     ACCESS_TOKEN_SECRET: "goldhorse",
     REFRESH_TOKEN_SECRET: "whitehorse",
-    DOMAIN:"http://198.23.235.73:8080/"
+    DOMAIN: "https://main.mydesignerplus.com"
 }
